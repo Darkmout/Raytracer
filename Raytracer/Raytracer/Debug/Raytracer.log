@@ -1,0 +1,19 @@
+﻿La génération a démarré 24/04/2014 11:14:00.
+     1>Projet "d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer\Raytracer.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>CudaBuild:
+         Compiling CUDA source file kernel.cu...
+         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmp34467a81fcc449af8f987c505fef40ea.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer\kernel.cu"
+         
+         d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer\kernel.cu" 
+     1>d:/bibliothÞque/documents/visual studio 2012/Projects/Raytracer/Raytracer/kernel.cu(173): warning : variable "d" was declared but never referenced
+     1>d:/bibliothÞque/documents/visual studio 2012/Projects/Raytracer/Raytracer/kernel.cu(284): warning : return type of function "main" must be "int"
+     1>d:/bibliothÞque/documents/visual studio 2012/Projects/Raytracer/Raytracer/kernel.cu(173): warning : variable "d" was declared but never referenced
+     1>d:/bibliothÞque/documents/visual studio 2012/Projects/Raytracer/Raytracer/kernel.cu(284): warning : return type of function "main" must be "int"
+     1>ptxas : fatal error : Ptx assembly aborted due to errors
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\BuildCustomizations\CUDA 5.5.targets(592,9): error MSB3721: La commande ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer\kernel.cu"" s'est arrêtée avec le code -1.
+     1>Génération du projet "d:\bibliothèque\documents\visual studio 2012\Projects\Raytracer\Raytracer\Raytracer.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:04.11
