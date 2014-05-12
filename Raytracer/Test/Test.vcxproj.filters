@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="kernel.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{f20ba91f-ef81-4fb3-b7a1-609dd557cbdc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3.cu">
+      <Filter>Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

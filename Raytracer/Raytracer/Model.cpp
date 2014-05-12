@@ -1,7 +1,7 @@
 #include "Model.h"
 #include <fstream>
 #include <vector>
-
+#include "Point.h"
 using namespace std;
 
 //static
