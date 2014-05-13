@@ -129,20 +129,19 @@ void CheckCudaError(cudaError_t cudaStatus)
 __global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera , Plane plane, int numRows, int numCols)
 {
 	//computing the thread index
-	//const int2 thread_2D_pos = make_int2( blockIdx.x * blockDim.x + threadIdx.x,
-	//	blockIdx.y * blockDim.y + threadIdx.y);
-	//const int thread_1D_pos = thread_2D_pos.y * numCols + thread_2D_pos.x;
-	//if (thread_2D_pos.x >= numCols || thread_2D_pos.y >= numRows)
-	//	return;
+	const int2 thread_2D_pos = make_int2( blockIdx.x * blockDim.x + threadIdx.x, blockIdx.y * blockDim.y + threadIdx.y);
+	const int thread_1D_pos = thread_2D_pos.y * numCols + thread_2D_pos.x;
+	if (thread_2D_pos.x >= numCols || thread_2D_pos.y >= numRows)
+		return;
 
 
-	//Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y);
+	Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y);
 
-	////computing the intersection
-	//if(plane.Intersect(ray))
-	//	outputImageRGBA[thread_1D_pos] = make_uchar4(255,255,255, 255);
-	//else
-	//	outputImageRGBA[thread_1D_pos] = make_uchar4(0,0,0, 255);
+	//computing the intersection
+	if(plane.Intersect(ray))
+		outputImageRGBA[thread_1D_pos] = make_uchar4(255,255,255, 255);
+	else
+		outputImageRGBA[thread_1D_pos] = make_uchar4(100,0,0, 255);
 
 }
 
@@ -158,23 +157,23 @@ void generateImage ()
 
 	//image
 	uchar4 *d_outputImageRGBA, *h_outputImageRGBA;
-	//h_outputImageRGBA = (uchar4*)malloc(  sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT);
-	//CheckCudaError(cudaMalloc(&d_outputImageRGBA,   sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT));
+	h_outputImageRGBA = (uchar4*)malloc(sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT);
+	CheckCudaError(cudaMalloc(&d_outputImageRGBA,   sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT));
 
 	//elements
 
 	Camera camera = Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	Plane plane = Plane(
-		Point(1,0.5,0.5),
-		Point(1,0.5,-0.5),
-		Point(1,-0.5,-0.5),
-		Point(1,-0.5,0.5)
+		Vec3(3,0.5,0.5),
+		Vec3(3,0.5,-0.5),
+		Vec3(3,-0.5,-0.5),
+		Vec3(3,-0.5,0.5)
 		);
 
-	//RayKernel<<<gridSize, blockSize>>>(d_outputImageRGBA, camera, plane, WINDOW_HEIGHT, WINDOW_WIDTH);	cudaDeviceSynchronize(); CheckCudaError(cudaGetLastError());
+	RayKernel<<<gridSize, blockSize>>>(d_outputImageRGBA, camera, plane, WINDOW_HEIGHT, WINDOW_WIDTH);	cudaDeviceSynchronize(); CheckCudaError(cudaGetLastError());
 
-	//CheckCudaError(cudaMemcpy(h_outputImageRGBA, d_outputImageRGBA, sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT, cudaMemcpyDeviceToHost));
+	CheckCudaError(cudaMemcpy(h_outputImageRGBA, d_outputImageRGBA, sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT, cudaMemcpyDeviceToHost));
 
 	int i, j;
 	for (i = 0; i < WINDOW_WIDTH; i++) 

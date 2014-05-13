@@ -5,13 +5,23 @@
 
 class Ray
 {
-public:
-	Point Origin;
-	Vec3 Direction;
+private:
 
-	__host__ __device__ Ray(void);
-	__host__ __device__ Ray(Point, Point);
-	__host__ __device__ Ray(Point, Vec3);
-	__host__ __device__ ~Ray(void);
+public:
+	
+	Vec3 Origin, Direction;
+
+	__host__ __device__ Ray(void)
+	{
+	}
+
+	__host__ __device__ Ray(Vec3 Origin, Vec3 Direction)
+	{
+		this->Origin = Origin;
+		this->Direction = Direction;
+	}
+
+	__host__ __device__ ~Ray(void)
+	{}
 };
 

@@ -88,8 +88,8 @@
 copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
-      <CodeGeneration>compute_20,sm_20</CodeGeneration>
-      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <CodeGeneration>compute_10,sm_10</CodeGeneration>
+      <GenerateRelocatableDeviceCode>false</GenerateRelocatableDeviceCode>
     </CudaCompile>
     <CudaLink />
   </ItemDefinitionGroup>
@@ -153,18 +153,12 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cu" />
-    <ClCompile Include="Model.cu" />
-    <ClCompile Include="Plane.cu" />
-    <ClCompile Include="Point.cu" />
-    <ClCompile Include="Ray.cu" />
-    <ClCompile Include="Vec3.cu" />
+    <ClCompile Include="Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Plane.h" />
-    <ClInclude Include="Point.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Vec3.h" />
   </ItemGroup>

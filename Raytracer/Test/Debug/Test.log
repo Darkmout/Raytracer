@@ -1,17 +1,29 @@
-﻿La génération a démarré 12/05/2014 01:11:56.
+﻿La génération a démarré 14/05/2014 01:06:48.
      1>Projet "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\Test.vcxproj" sur le nœud 2 (Build cible(s)).
-     1>CudaBuild:
+     1>AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu 
+       CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmpd9f1eecf148a40abb00d00c4e5bdc8cf.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin" -rdc=true -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu"
+         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmp63a90ad0c6524e879f9cb37d313f77d4.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu"
          
-         D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin" -rdc=true -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu" 
-     1>D:/bibliothÞque/Documents/GitHub/raytracer/Raytracer/Test/kernel.cu(160): warning : variable "d_outputImageRGBA" was declared but never referenced
-     1>D:/bibliothÞque/Documents/GitHub/raytracer/Raytracer/Test/kernel.cu(160): warning : variable "d_outputImageRGBA" was declared but never referenced
-     1>ptxas : fatal error : Ptx assembly aborted due to errors
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\BuildCustomizations\CUDA 5.5.targets(592,9): error MSB3721: La commande ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin" -rdc=true -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu"" s'est arrêtée avec le code -1.
-     1>Génération du projet "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\Test.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+         D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\kernel.cu" 
+     1>d:\bibliothèque\documents\github\raytracer\raytracer\test\Vec3.h(35): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+     1>d:\bibliothèque\documents\github\raytracer\raytracer\test\Camera.h(45): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\Test.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\Test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\Test.lib" /MACHINE:X86 Debug\kernel.cu.obj
+         Debug\Model.obj
+         Test.vcxproj -> D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\Test.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart32_55.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart64_55.dll
+                 2 fichier(s) copié(s).
+     1>Génération du projet "D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\Test\Test.vcxproj" terminée (Build cible(s)).
 
-ÉCHEC de la build.
+La génération a réussi.
 
-Temps écoulé 00:00:02.47
+Temps écoulé 00:00:04.07

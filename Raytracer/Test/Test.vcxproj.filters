@@ -9,22 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cu">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cu">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Plane.cu">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cu">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cu">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec3.cu">
+    <ClCompile Include="Model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,9 +24,6 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Vec3.h">
