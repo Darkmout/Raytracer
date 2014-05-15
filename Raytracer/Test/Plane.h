@@ -1,6 +1,5 @@
 #pragma once
 #include "Vec3.h"
-#include "Point.h"
 #include "Ray.h"
 #include "device_launch_parameters.h"
 
@@ -36,7 +35,18 @@ public:
 	{
 		//http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-9-ray-triangle-intersection/ray-triangle-intersection-geometric-solution/
 
-		float t = - ( Normal.Dot(IncidentRay.Origin) + D) / (Normal.Dot(IncidentRay.Direction));
+		float NormalDotRayDirection = Normal.Dot(IncidentRay.Direction);
+		//if the ray and the plane are parallel, their dot product is null
+		if(NormalDotRayDirection == 0)
+			return false;
+
+		//compute the distance t from the place
+		float t = - ( Normal.Dot(IncidentRay.Origin) + D) / (NormalDotRayDirection);
+		//if the plane is behind the origin of the ray
+		if(t<0)
+			return false;
+
+		//compute the point on the plane
 		Vec3 P = IncidentRay.Origin + (IncidentRay.Direction * t); 
 
 		Vec3 C0 = P - v0;
@@ -54,7 +64,7 @@ public:
 			return false;
 	}
 
-	__host__ __device__ Vec3 FaceToWorld(float x, float y)
+	__host__ __device__ Vec3 FaceToWorld(float x, float y) //TODO: doesn't seem to work
 	{
 
 		Vec3 result = Vec3(
@@ -65,5 +75,19 @@ public:
 
 		return result;
 	}
+
+	//__host__ __device__ Vec3 WorldToFace(Vec3 Point)
+	//{
+	///*	float x = 
+	//	Vec3 result = Vec3(
+	//		this->v0.x*x*y + this->v1.x*(1-x)*(y) + this->v2.x*(x)*(1-y) + this->v3.x*(1-x)*(1-y),
+	//		this->v0.y*x*y + this->v1.y*(1-x)*(y) + this->v2.y*(x)*(1-y) + this->v3.y*(1-x)*(1-y),
+	//		this->v0.z*x*y + this->v1.z*(1-x)*(y) + this->v2.z*(x)*(1-y) + this->v3.z*(1-x)*(1-y)
+	//		);
+
+	//	return result;*/
+	//	//TODO
+	//	return nill;
+	//}
 };
 

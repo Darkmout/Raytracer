@@ -1,5 +1,4 @@
 #pragma once
-#include "Point.h"
 #include "device_launch_parameters.h"
 #include "cuda_runtime.h"
 
@@ -27,12 +26,26 @@ public:
 
 	__host__ __device__ float Length()
 	{
-		return fabsf(this->x) + fabsf(this->y) + fabsf(this->z);
+		//TODO cannot use fabsf to stay host and device compliant
+		float absx = x;
+		if(absx < 0)
+			absx *= -1;
+
+		float absy = y;
+		if(absy < 0)
+			absy *= -1;
+
+		float absz = z;
+		if(absz < 0)
+			absz *= -1;
+
+		return absx + absy + absz;
 	}
+
 
 	__host__ __device__ void Normalize()
 	{
-		int sum = this->Length();
+		float sum = this->Length();
 		this->x /= sum;
 		this->y /= sum;
 		this->z /= sum; 
@@ -54,9 +67,15 @@ public:
 	//TODO: plus lisible?
 	__host__ __device__ Vec3 Cross (Vec3 o)
 	{ 
-		return Vec3(this->y * o.z - this->z * o.y, this->z * o.x - this->x * o.z, this->x * o.y - this->y * o.x	);
+		return Vec3(
+			this->y * o.z - this->z * o.y,
+			this->z * o.x - this->x * o.z, 
+			this->x * o.y - this->y * o.x);
 	}
 
+	//dot product of two perpendicular vectors = 0
+	//dot product of two vectors pointing to the same direction > 0
+	//dot product of two vectors pointing to opposite directions < 0
 	__host__ __device__ float Dot (Vec3 o)
 	{ 
 		return 	this->x * o.x + this->y * o.y + this->z * o.z ;

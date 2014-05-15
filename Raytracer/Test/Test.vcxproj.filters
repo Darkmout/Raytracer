@@ -14,10 +14,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="Model.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="Camera.h">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">

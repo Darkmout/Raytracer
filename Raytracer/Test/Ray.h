@@ -1,5 +1,5 @@
 #pragma once
-#include "Point.h"
+
 #include "Vec3.h"
 #include "device_launch_parameters.h"
 
