@@ -66,13 +66,10 @@ public:
 
 	__host__ __device__ Vec3 FaceToWorld(float x, float y) //TODO: doesn't seem to work
 	{
+		Vec3 X = ((v1 - v0) * x);
+		Vec3 Y = ((v2 - v0) * y);
 
-		Vec3 result = Vec3(
-			this->v0.x*x*y + this->v1.x*(1-x)*(y) + this->v2.x*(x)*(1-y) + this->v3.x*(1-x)*(1-y),
-			this->v0.y*x*y + this->v1.y*(1-x)*(y) + this->v2.y*(x)*(1-y) + this->v3.y*(1-x)*(1-y),
-			this->v0.z*x*y + this->v1.z*(1-x)*(y) + this->v2.z*(x)*(1-y) + this->v3.z*(1-x)*(1-y)
-			);
-
+		Vec3 result = v0 + (X + Y); 
 		return result;
 	}
 

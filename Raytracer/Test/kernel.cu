@@ -145,20 +145,19 @@ __global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera , Plane* s
 	Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y);
 	//printf("thread [%d,%d], rayDirectio %f,%f,%f", thread_2D_pos.x, thread_2D_pos.y, ray.Direction.x, ray.Direction.y,ray.Direction.z);
 	//computing the intersection
-	//bool intersect = false;
-	//for(int i = 0; i < sceneCount; i++)
-	//{
-	//	//if(scene[i].Intersect(ray))
-	//	//if(ray.Direction.x >= numCols * 0.25 && thread_2D_pos.x < numCols * 0.75) 
-	//	//intersect = true;
+	bool intersect = false;
+	for(int i = 0; i < sceneCount; i++)
+	{
+		if(scene[i].Intersect(ray))
+		intersect = true;
+	}
 
-	//}
+	if(intersect)
+		outputImageRGBA[thread_1D_pos] = make_uchar4(255,255,255, 255);
+	else
+		outputImageRGBA[thread_1D_pos] = make_uchar4(0,0,0, 255);
 
-	//if(intersect)
-	//	outputImageRGBA[thread_1D_pos] = make_uchar4(255,255,255, 255);
-	//else
-	//	outputImageRGBA[thread_1D_pos] = make_uchar4(0,0,0, 255);
-	outputImageRGBA[thread_1D_pos] = make_uchar4(ray.Direction.y * 255,ray.Direction.y * 255,ray.Direction.y * 255, 255);
+	//outputImageRGBA[thread_1D_pos] = make_uchar4(((ray.Direction.x + 1) / 2) * 255,((ray.Direction.x + 1) / 2)  * 255, ((ray.Direction.x + 1) / 2)  * 255, 255);
 }
 
 //-------------------------------------------------------------------------

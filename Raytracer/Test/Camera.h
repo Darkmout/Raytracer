@@ -14,21 +14,21 @@ public:
 
 	__host__ __device__ Camera(void)
 	{
-		this->Origin = Vec3(0,0,0);
+		this->Origin = Vec3(0,0,10);
 		this->Plan = Plane(
-			Vec3(1,0.5,0.5),
-			Vec3(1,0.5,-0.5),
-			Vec3(1,-0.5,-0.5),
-			Vec3(1,-0.5,0.5));
+			Vec3(-1,1,9),
+			Vec3(1,1,9),
+			Vec3(-1,-1,9),
+			Vec3(1,-1,9));
 	}
 	__host__ __device__ Camera(int Width, int Height)
 	{
 		this->Width = Width;
 		this->Height = Height;
-		this->Origin = Vec3(0,0,10);
+		this->Origin = Vec3(0,0,9.5);
 		this->Plan = Plane(
-			Vec3(-10,1,9),
-			Vec3(1,10,9),
+			Vec3(-1,1,9),
+			Vec3(1,1,9),
 			Vec3(-1,-1,9),
 			Vec3(1,-1,9));
 	}
@@ -43,7 +43,7 @@ public:
 		float y = (float)pixelY / (float)Height;
 
 		Ray ray = Ray(this->Origin, (this->Plan.FaceToWorld(x, y) - this->Origin));
-		ray.Direction.Normalize();
+		//ray.Direction.Normalize();
 		return ray;
 	}
 };

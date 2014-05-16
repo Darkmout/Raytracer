@@ -64,6 +64,10 @@ public:
 		return Vec3(this->x * o, this->y * o, this->z * o);
 	}
 
+	__host__ __device__  Vec3 operator/(float o){
+		return Vec3(this->x / o, this->y / o, this->z / o);
+	}
+
 	//TODO: plus lisible?
 	__host__ __device__ Vec3 Cross (Vec3 o)
 	{ 
