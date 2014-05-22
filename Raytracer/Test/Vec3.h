@@ -77,6 +77,9 @@ public:
 			this->x * o.y - this->y * o.x);
 	}
 
+
+
+
 	//dot product of two perpendicular vectors = 0
 	//dot product of two vectors pointing to the same direction > 0
 	//dot product of two vectors pointing to opposite directions < 0

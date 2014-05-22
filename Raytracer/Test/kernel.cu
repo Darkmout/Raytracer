@@ -21,16 +21,20 @@
 #define WINDOW_WIDTH 512
 #define WINDOW_HEIGHT 512
 
+void CheckCudaError(cudaError_t cudaStatus)
+{
+	if(cudaStatus != cudaSuccess)
+	{
+		printf(cudaGetErrorString(cudaStatus));
+		exit(1);
+	}
+}
+
 //the scene
 Model scene;
 
 //  Initialization
 void init ();
-
-//  Callback functions
-void display (void);
-void mouse (int button, int state, int x, int y);
-void keyboard (unsigned char key, int x, int y);
 
 //  Support Functions
 void centerOnScreen ();
@@ -38,6 +42,9 @@ void centerOnScreen ();
 //  define the window position on screen
 int window_x;
 int window_y;
+int oldMouseX;
+int oldMouseY;
+bool mouseClick = false;
 
 //  variable representing the window title
 char *window_title = "Image Generator";
@@ -51,7 +58,7 @@ void generateImage ();
 
 //  Represents the pixel buffer in memory
 GLubyte buffer[WINDOW_WIDTH][WINDOW_HEIGHT][3];
-
+uchar4 *d_outputImageRGBA, *h_outputImageRGBA;
 
 
 
@@ -60,6 +67,9 @@ GLubyte buffer[WINDOW_WIDTH][WINDOW_HEIGHT][3];
 //-------------------------------------------------------------------------
 void init ()
 {	
+	h_outputImageRGBA = (uchar4*)malloc(sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT);
+	CheckCudaError(cudaMalloc(&d_outputImageRGBA,   sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT));
+
 	glClearColor (0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_FLAT);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -73,10 +83,24 @@ void init ()
 //-------------------------------------------------------------------------
 void display (void)
 {
+	CheckCudaError(cudaMemcpy(h_outputImageRGBA, d_outputImageRGBA, sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT, cudaMemcpyDeviceToHost));
+	int i, j;
+	for (i = 0; i < WINDOW_WIDTH; i++) 
+	{
+		for (j = 0; j < WINDOW_HEIGHT; j++)
+		{
+			buffer[i][j][0] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].x);
+			buffer[i][j][1] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].y);
+			buffer[i][j][2] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].z);
+		}
+	}
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB,
 		GL_UNSIGNED_BYTE, buffer);
 	glutSwapBuffers ();
+	
+
 }
 
 
@@ -85,30 +109,63 @@ void display (void)
 //  This function is passed to the glutMouseFunc and is called 
 //  whenever the mouse is clicked.
 //-------------------------------------------------------------------------
-void mouse (int button, int state, int x, int y)
+void mouseMove (int x, int y)
 {
-	if (state == GLUT_DOWN)
+	//printf("%d %d\n", oldMouseX-x, oldMouseY-y);
+	if(mouseClick)
 	{
-		generateImage ();
-		glutPostRedisplay ();
+		scene.camera.Rotation(oldMouseX -x, oldMouseY - y);
+		generateImage();
+		glutPostRedisplay();
+		oldMouseX = x;
+		oldMouseY = y;
+	}
+}
+void mouseButton(int button, int state, int x, int y)
+{
+	if(state == GLUT_DOWN)
+	{
+		mouseClick = true;
+		oldMouseX = x;
+		oldMouseY = y;
+	}
+	else
+	{
+		mouseClick = false;
 	}
 }
 
 //-------------------------------------------------------------------------
-//  This function is passed to the glutKeyboardFunc and is called 
+//  This function is passed to the glutKeyboardFunc and is called s
 //  whenever the user hits a key.
 //-------------------------------------------------------------------------
 void keyboard (unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 'g':
-		generateImage ();
-		glutPostRedisplay ();
+	case 'z':
+		scene.camera.Move(Vec3(1,0,0));
+		break;
+	case 'q':
+		scene.camera.Move(Vec3(0,-1,0));
+		break;
+	case 's':
+		scene.camera.Move(Vec3(-1,0,0));
+		break;
+	case 'd':
+		scene.camera.Move(Vec3(0,1,0));
+		break;
+	case 'c':
+		scene.camera.Move(Vec3(0,0,-1));
+		break;
+	case 32:
+		scene.camera.Move(Vec3(0,0,1));
 		break;
 	case 27:
 		exit (0);
 	}
+	generateImage();
+	glutPostRedisplay();
 }
 
 //-------------------------------------------------------------------------
@@ -121,19 +178,10 @@ void centerOnScreen ()
 	window_y = (glutGet (GLUT_SCREEN_HEIGHT) - WINDOW_HEIGHT)/2;
 }
 
-void CheckCudaError(cudaError_t cudaStatus)
-{
-	if(cudaStatus != cudaSuccess)
-	{
-		printf(cudaGetErrorString(cudaStatus));
-		exit(1);
-	}
-}
-
 
 
 //kernel
-__global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera , Plane* scene, int sceneCount, int numRows, int numCols)
+__global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera, Plane* scene, int sceneCount, int numRows, int numCols)
 {
 	//computing the thread index
 	const int2 thread_2D_pos = make_int2( blockIdx.x * blockDim.x + threadIdx.x, blockIdx.y * blockDim.y + threadIdx.y);
@@ -142,14 +190,14 @@ __global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera , Plane* s
 		return;
 
 
-	Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y);
+	Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y, numRows, numCols);
 	//printf("thread [%d,%d], rayDirectio %f,%f,%f", thread_2D_pos.x, thread_2D_pos.y, ray.Direction.x, ray.Direction.y,ray.Direction.z);
 	//computing the intersection
 	bool intersect = false;
 	for(int i = 0; i < sceneCount; i++)
 	{
 		if(scene[i].Intersect(ray))
-		intersect = true;
+			intersect = true;
 	}
 
 	if(intersect)
@@ -163,38 +211,33 @@ __global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera , Plane* s
 //-------------------------------------------------------------------------
 //  Generate new image with random colors
 //-------------------------------------------------------------------------
+
+
+const dim3 blockSize(16 , 16);
+const dim3 gridSize (WINDOW_WIDTH / blockSize.x + 1, WINDOW_HEIGHT / blockSize.y + 1);
+
 void generateImage ()
 {
+	cudaEvent_t startTimer, stopTimer;
+	cudaEventCreate(&startTimer);
+	cudaEventCreate(&stopTimer);
+	cudaEventRecord(startTimer,0);
 
 
-	const dim3 blockSize(16 , 16);
-	const dim3 gridSize (WINDOW_WIDTH / blockSize.x + 1, WINDOW_HEIGHT / blockSize.y + 1);
 
-	//initialisation
-	uchar4 *d_outputImageRGBA, *h_outputImageRGBA;
-	Plane *d_scene;
-	h_outputImageRGBA = (uchar4*)malloc(sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT);
-	CheckCudaError(cudaMalloc(&d_outputImageRGBA,   sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT));
+	RayKernel<<<gridSize, blockSize>>>(d_outputImageRGBA, scene.camera, scene.d_scene, scene.Planes.size(), WINDOW_HEIGHT, WINDOW_WIDTH);	cudaDeviceSynchronize(); CheckCudaError(cudaGetLastError());
 
-	CheckCudaError(cudaMalloc(&d_scene,   sizeof(Plane) * scene.Planes.size()));
-	CheckCudaError(cudaMemcpy(d_scene, &scene.Planes[0], sizeof(Plane) * scene.Planes.size(), cudaMemcpyHostToDevice));
 
-	Camera camera = Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	RayKernel<<<gridSize, blockSize>>>(d_outputImageRGBA, camera, d_scene, scene.Planes.size(), WINDOW_HEIGHT, WINDOW_WIDTH);	cudaDeviceSynchronize(); CheckCudaError(cudaGetLastError());
 
-	CheckCudaError(cudaMemcpy(h_outputImageRGBA, d_outputImageRGBA, sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT, cudaMemcpyDeviceToHost));
+	cudaEventRecord(stopTimer,0);
+	cudaEventSynchronize(startTimer);
+	cudaEventSynchronize(stopTimer);
+	float timerResult;
+	cudaEventElapsedTime(&timerResult, startTimer, stopTimer);
 
-	int i, j;
-	for (i = 0; i < WINDOW_WIDTH; i++) 
-	{
-		for (j = 0; j < WINDOW_HEIGHT; j++)
-		{
-			buffer[i][j][0] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].x);
-			buffer[i][j][1] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].y);
-			buffer[i][j][2] = (GLubyte) (h_outputImageRGBA[i + j* WINDOW_HEIGHT].z);
-		}
-	}
+	glutSetWindowTitle(std::to_string(100./timerResult).c_str());
+
 }
 
 
@@ -235,7 +278,10 @@ int main (int argc, char* argv[])
 	// Set the callback functions
 	glutDisplayFunc (display);
 	glutKeyboardFunc (keyboard);
-	glutMouseFunc (mouse);
+	glutPassiveMotionFunc(mouseMove);
+	glutMouseFunc(mouseButton);
+
+	glutWarpPointer(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 
 	//  Start GLUT event processing loop
 	glutMainLoop();

@@ -18,6 +18,12 @@ public:
 		this->v2 = v2;
 		this->v3 = v3;
 
+		this->ActualisePosition();
+
+	}
+
+	__host__ __device__ void ActualisePosition()
+	{
 		this->Normal = (v0-v1).Cross(v0-v2);
 
 		this->D = Normal.Dot(v0);
@@ -86,5 +92,15 @@ public:
 	//	//TODO
 	//	return nill;
 	//}
+
+	__host__ __device__  Plane operator-(Vec3 o){
+
+		return Plane(this->v0 - o, this->v1 - o, this->v2 - o, this->v3 - o);
+	}
+
+		__host__ __device__  Plane operator+(Vec3 o){
+
+		return Plane(this->v0 + o, this->v1 + o, this->v2 + o, this->v3 + o);
+	}
 };
 

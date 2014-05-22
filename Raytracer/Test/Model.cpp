@@ -6,6 +6,7 @@ Model::Model(string filePath)
 {
 	float x, y, z;
 	int v0, v1, v2, v3;
+	int vt0, vt1, vt2, vt3;
 	char charLol;
 	ifstream infile(filePath);
 	string line;
@@ -46,7 +47,7 @@ Model::Model(string filePath)
 			if(line[0] == 'f') //face "f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3"
 			{
 				istringstream iss(line);
-				if (!(iss >> charLol >> v0 >> v1 >> v2 >> v3)) { 
+				if (!(iss >> charLol >> v0 >> charLol >> vt0 >> v1 >> charLol >> vt1  >> v2 >> charLol >> vt2  >> v3 >> charLol >> vt3 )) { 
 					throw new exception(); 
 				} 
 
@@ -68,6 +69,8 @@ Model::Model(string filePath)
 		exit(0);
 	}
 
+	UpdateScene();
+
 }
 
 Model::Model(void)
@@ -79,3 +82,13 @@ Model::~Model(void)
 {
 }
 
+void Model::UpdateScene()
+{
+
+
+	cudaMalloc(&d_scene,   sizeof(Plane) * Planes.size());
+	cudaMemcpy(d_scene, &Planes[0], sizeof(Plane) * Planes.size(), cudaMemcpyHostToDevice);
+
+	camera = Camera();
+
+}
