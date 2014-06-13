@@ -83,6 +83,7 @@ void init ()
 //-------------------------------------------------------------------------
 void display (void)
 {
+	generateImage();
 	CheckCudaError(cudaMemcpy(h_outputImageRGBA, d_outputImageRGBA, sizeof(uchar4) * WINDOW_WIDTH * WINDOW_HEIGHT, cudaMemcpyDeviceToHost));
 	int i, j;
 	for (i = 0; i < WINDOW_WIDTH; i++) 
@@ -114,11 +115,11 @@ void mouseMove (int x, int y)
 	//printf("%d %d\n", oldMouseX-x, oldMouseY-y);
 	if(mouseClick)
 	{
-		scene.camera.Rotation(oldMouseX -x, oldMouseY - y);
-		generateImage();
-		glutPostRedisplay();
+		scene.camera.Rotation(-(oldMouseX -x), (oldMouseY - y));
 		oldMouseX = x;
 		oldMouseY = y;
+		glutPostRedisplay();
+
 	}
 }
 void mouseButton(int button, int state, int x, int y)
@@ -131,6 +132,7 @@ void mouseButton(int button, int state, int x, int y)
 	}
 	else
 	{
+	
 		mouseClick = false;
 	}
 }
@@ -164,7 +166,6 @@ void keyboard (unsigned char key, int x, int y)
 	case 27:
 		exit (0);
 	}
-	generateImage();
 	glutPostRedisplay();
 }
 
@@ -207,11 +208,6 @@ __global__ void RayKernel(uchar4* const outputImageRGBA,Camera camera, Plane* sc
 
 	//outputImageRGBA[thread_1D_pos] = make_uchar4(((ray.Direction.x + 1) / 2) * 255,((ray.Direction.x + 1) / 2)  * 255, ((ray.Direction.x + 1) / 2)  * 255, 255);
 }
-
-//-------------------------------------------------------------------------
-//  Generate new image with random colors
-//-------------------------------------------------------------------------
-
 
 const dim3 blockSize(16 , 16);
 const dim3 gridSize (WINDOW_WIDTH / blockSize.x + 1, WINDOW_HEIGHT / blockSize.y + 1);
@@ -278,7 +274,7 @@ int main (int argc, char* argv[])
 	// Set the callback functions
 	glutDisplayFunc (display);
 	glutKeyboardFunc (keyboard);
-	glutPassiveMotionFunc(mouseMove);
+	glutMotionFunc(mouseMove);
 	glutMouseFunc(mouseButton);
 
 	glutWarpPointer(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);

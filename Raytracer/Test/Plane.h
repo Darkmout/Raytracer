@@ -2,15 +2,19 @@
 #include "Vec3.h"
 #include "Ray.h"
 #include "device_launch_parameters.h"
+#include "Model.h"
 
 class Plane
 {
 public:
-	Vec3 v0, v1, v2, v3, Normal, v0v1, v1v2, v2v3, v3v0 ;
+	Vec3 v0, v1, v2, v3, Normal, v0v1, v1v2, v2v3, v3v0 , vt0, vt1, vt2, vt3;
+	mtl* material;
 	float D;
 
 	__host__ __device__ Plane(void)
 	{}
+
+	//the points have to be anti-clockwise
 	__host__ __device__ Plane(Vec3 v0, Vec3 v1, Vec3 v2, Vec3 v3)
 	{
 		this->v0 = v0;
@@ -22,9 +26,39 @@ public:
 
 	}
 
+	__host__ __device__ Plane(Vec3 v0, Vec3 v1, Vec3 v2, Vec3 v3, Vec3 vt0, Vec3 vt1, Vec3 vt2, Vec3 vt3)
+	{
+		this->v0 = v0;
+		this->v1 = v1;
+		this->v2 = v2;
+		this->v3 = v3;
+		this->vt0 = vt0;
+		this->vt1 = vt1;
+		this->vt2 = vt2;
+		this->vt3 = vt3;
+
+		this->ActualisePosition();
+	}
+
+	__host__ __device__ Plane(Vec3 v0, Vec3 v1, Vec3 v2, Vec3 v3, Vec3 vt0, Vec3 vt1, Vec3 vt2, Vec3 vt3)
+	{
+		this->v0 = v0;
+		this->v1 = v1;
+		this->v2 = v2;
+		this->v3 = v3;
+		this->vt0 = vt0;
+		this->vt1 = vt1;
+		this->vt2 = vt2;
+		this->vt3 = vt3;
+
+		this->ActualisePosition();
+
+	}
 	__host__ __device__ void ActualisePosition()
 	{
-		this->Normal = (v0-v1).Cross(v0-v2);
+
+		this->Normal = (v1-v0).Cross(v3-v0);
+		this->Normal.Normalize();
 
 		this->D = Normal.Dot(v0);
 
@@ -73,7 +107,7 @@ public:
 	__host__ __device__ Vec3 FaceToWorld(float x, float y) //TODO: doesn't seem to work
 	{
 		Vec3 X = ((v1 - v0) * x);
-		Vec3 Y = ((v2 - v0) * y);
+		Vec3 Y = ((v3 - v0) * y);
 
 		Vec3 result = v0 + (X + Y); 
 		return result;
@@ -98,7 +132,7 @@ public:
 		return Plane(this->v0 - o, this->v1 - o, this->v2 - o, this->v3 - o);
 	}
 
-		__host__ __device__  Plane operator+(Vec3 o){
+	__host__ __device__  Plane operator+(Vec3 o){
 
 		return Plane(this->v0 + o, this->v1 + o, this->v2 + o, this->v3 + o);
 	}
