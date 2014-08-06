@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="GPUAnimBitmap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{f91cd16d-c00f-477c-84f6-2f90850175e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Camera.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Model.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Plane.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Ray.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Vec3.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Kernels.cuh" />
+    <None Include="Material.cuh">
+      <Filter>Model</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="Main.cu" />
+  </ItemGroup>
+</Project>

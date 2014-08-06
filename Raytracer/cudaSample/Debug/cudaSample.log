@@ -1,0 +1,54 @@
+﻿La génération a démarré 06/08/2014 19:38:41.
+     1>Projet "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\cudaSample.vcxproj" sur le nœud 2 (Rebuild cible(s)).
+     1>CudaClean:
+         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmp058d6e21f1924a57982126e9f9b3b4ae.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\Main.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\Main.cu" -clean
+         
+         d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\Main.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\Main.cu" -clean 
+       AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\Main.cu" 
+       CudaBuild:
+         Compiling CUDA source file Main.cu...
+         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmp9c14caef9e6e4b158b9495a2186c98a7.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\Main.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\Main.cu"
+         
+         d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\Main.cu.obj "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\Main.cu" 
+     1>D:\bibliothÞque\Documents\GitHub\raytracer\Raytracer\common\inc\rendercheck_gl.h(363): warning : variable "fsize" was set but never used
+     1>D:\bibliothÞque\Documents\GitHub\raytracer\Raytracer\common\inc\rendercheck_gl.h(454): warning : variable "fsize" was set but never used
+     1>D:\bibliothÞque\Documents\GitHub\raytracer\Raytracer\common\inc\rendercheck_gl.h(363): warning : variable "fsize" was set but never used
+     1>D:\bibliothÞque\Documents\GitHub\raytracer\Raytracer\common\inc\rendercheck_gl.h(454): warning : variable "fsize" was set but never used
+     1>d:\bibliothèque\documents\visual studio 2012\projects\cudasample\cudasample\Plane.cuh(75): warning C4305: 'return' : troncation de 'double' à 'float'
+     1>d:\bibliothèque\documents\visual studio 2012\projects\cudasample\cudasample\Plane.cuh(81): warning C4305: 'return' : troncation de 'double' à 'float'
+     1>d:\bibliothèque\documents\visual studio 2012\projects\cudasample\cudasample\Plane.cuh(98): warning C4305: 'return' : troncation de 'double' à 'float'
+     1>d:/bibliothèque/documents/visual studio 2012/Projects/cudaSample/cudaSample/Main.cu(68): warning C4804: '-' : utilisation risquée du type 'bool' dans l'opération
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\algorithm(1066): warning C4996: 'std::_Transform1': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\algorithm(1047) : voir la déclaration de 'std::_Transform1'
+                 D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\common\inc\helper_image.h(347) : voir la référence à l'instanciation de la fonction modèle '_OutIt std::transform<T*,unsigned char*,_GLOBAL__N__39_tmpxft_000063e8_00000000_5_Main_cpp1_ii_5bb6d03f::ConverterToUByte<unsigned char>>(_InIt,_InIt,_OutIt,_Fn1)' en cours de compilation
+                 with
+                 [
+                     _OutIt=unsigned char *,
+                     T=unsigned char,
+                     _InIt=unsigned char *,
+                     _Fn1=_GLOBAL__N__39_tmpxft_000063e8_00000000_5_Main_cpp1_ii_5bb6d03f::ConverterToUByte<unsigned char>
+                 ]
+                 D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\common\inc\rendercheck_gl.h(197) : voir la référence à l'instanciation de la fonction modèle 'bool sdkSavePGM<unsigned char>(const char *,T *,unsigned int,unsigned int)' en cours de compilation
+                 with
+                 [
+                     T=unsigned char
+                 ]
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\cudaSample.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\common\lib\Win32" /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\cudaSample.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\cudaSample.lib" /MACHINE:X86 Debug\Main.cu.obj
+         cudaSample.vcxproj -> d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\cudaSample.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart32_55.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart64_55.dll
+                 2 fichier(s) copié(s).
+     1>Génération du projet "d:\bibliothèque\documents\visual studio 2012\Projects\cudaSample\cudaSample\cudaSample.vcxproj" terminée (Rebuild cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:16.98

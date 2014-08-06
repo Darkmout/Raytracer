@@ -9,25 +9,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Model.cpp">
+    <ClInclude Include="Camera.cuh">
       <Filter>Model</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="mtllib.cuh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.cuh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.cuh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3.cuh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.cuh">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Model.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec3.h">
-      <Filter>Model</Filter>
-    </ClInclude>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -68,6 +68,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\bibliothèque\Documents\GitHub\raytracer\Raytracer\common\inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -82,14 +83,17 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../common/lib/$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
-      <CodeGeneration>compute_10,sm_10</CodeGeneration>
+      <CodeGeneration>compute_20,sm_20</CodeGeneration>
       <GenerateRelocatableDeviceCode>false</GenerateRelocatableDeviceCode>
+      <CInterleavedPTX>true</CInterleavedPTX>
+      <PtxAsOptionV>true</PtxAsOptionV>
     </CudaCompile>
     <CudaLink />
   </ItemDefinitionGroup>
@@ -153,14 +157,15 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Model.cpp" />
+    <ClInclude Include="Camera.cuh" />
+    <ClInclude Include="mtllib.cuh" />
+    <ClInclude Include="Model.cuh" />
+    <ClInclude Include="Plane.cuh" />
+    <ClInclude Include="Ray.cuh" />
+    <ClInclude Include="Vec3.cuh" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Plane.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="Vec3.h" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
