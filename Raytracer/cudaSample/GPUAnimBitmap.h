@@ -34,7 +34,7 @@ public:
 	int Width, Height;
 	void (*DrawCallback)(uchar4*, int, int);
 	
-	GPUAnimBitmap(int argc, char** argv,  void (*DrawCallback)(uchar4*, int, int) = NULL, void (*KeyboardCallback)(unsigned char, int, int) = NULL, void (*MouseCallback)(int, int, int, int) = NULL);
+	GPUAnimBitmap(int argc, char** argv,  void (*DrawCallback)(uchar4*, int, int) = NULL, void (*KeyboardCallback)(unsigned char, int, int) = NULL, void (*MouseCallback)(int, int, int, int) = NULL, void (*MotionCallback)(int, int) = NULL);
 	void GPUAnimBitmap::StartMainLoop();
 	~GPUAnimBitmap();
 };
@@ -68,14 +68,18 @@ static void GLDraw(void)
 	glutSetWindowTitle(std::to_string(FPS).c_str());
 }
 
+static void Reshape(int w, int h)
+{
+	printf("%d, %d \n", w, h);
+}
 
-GPUAnimBitmap::GPUAnimBitmap(int argc, char** argv, void (*DrawCallback)(uchar4*, int, int),  void (*KeyboardCallback)(unsigned char, int, int), void (*MouseCallback)(int, int, int, int))
+GPUAnimBitmap::GPUAnimBitmap(int argc, char** argv, void (*DrawCallback)(uchar4*, int, int),  void (*KeyboardCallback)(unsigned char, int, int), void (*MouseCallback)(int, int, int, int), void (*MotionCallback)(int,  int))
 {
 	GPUAnimBitmap**   bitmap = get_bitmap_ptr();
 	*bitmap = this;
 
-	Width = 512;
-	Height = 512;
+	Width = 1024;
+	Height = 1024;
 
 	this->DrawCallback = DrawCallback;
 
@@ -124,8 +128,10 @@ GPUAnimBitmap::GPUAnimBitmap(int argc, char** argv, void (*DrawCallback)(uchar4*
 
 	checkCudaErrors(cudaGraphicsUnmapResources(1, &Resource, NULL));
 	glutDisplayFunc(GLDraw);
+	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(KeyboardCallback);
 	glutMouseFunc(MouseCallback);
+	glutMotionFunc(MotionCallback);
 }
 
 void GPUAnimBitmap::StartMainLoop()

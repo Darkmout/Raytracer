@@ -122,20 +122,17 @@ public:
 
 	}
 
-
-
 	~Model(void)
 	{
 		//checkCudaErrors(cudaFree(d_scene));
 	}
-
 
 	void Loadmtllib(std::string path)
 	{
 		ifstream infile(path);
 		string line;
 		int lineNumber = 0;
-
+		Material* currentMaterial;
 
 		try{
 			while (getline(infile, line))
@@ -144,17 +141,28 @@ public:
 
 				if(int pos = line.find("newmtl") != string::npos)
 				{
-					//material = &Materials[line.substr(7)];
-					uchar4 RandomCol;
-					RandomCol.x = rand() %255;
-					RandomCol.y = rand() %255;
-					RandomCol.z = rand() %255;
-
-					Material *d_Material, h_Material(RandomCol);						
+					Material *d_Material;						
 					checkCudaErrors(cudaMalloc(&d_Material, sizeof(Material)));
-					checkCudaErrors(cudaMemcpy(d_Material, &h_Material, sizeof(Material), cudaMemcpyHostToDevice)); 
 
+					currentMaterial = d_Material;
 					Materials.emplace(line.substr(7), d_Material);
+				}
+				else if(line[0] == 'K' && line[1] == 'd') //texture "vt float float"
+				{
+					istringstream iss(line);
+					char space;
+					float R, G, B;
+					if (!(iss >> space >> space >> R >> G >> B)) { 
+						throw new exception(); 
+					} 
+					Material host = Material(make_uchar4(R*255, G*255,B*255, 0));
+					checkCudaErrors(cudaMemcpy(currentMaterial, &host,sizeof(Material), cudaMemcpyHostToDevice));
+				}
+				else if(int pos = line.find("map_Kd") != string::npos)
+				{
+					ifstream texture;
+					string textureName = line.substr(7);
+					texture.open(path.substr(0, path.find_last_of("/\\")) + "\\" + textureName); //TODO: linux paths 
 				}
 			}
 		}
@@ -164,6 +172,11 @@ public:
 			exit(1);
 		}
 
+	}
+
+	void LoadHdr(std::string path)
+	{
+			ifstream infile(path);
 	}
 
 	void UpdateScene()

@@ -19,10 +19,11 @@ Model Scene;
 
 void DrawCallback(uchar4* devPtr, int Width, int Height)
 {
+	//RayCPU(devPtr, Scene.camera, &Scene.Planes[0], Scene.Planes.size(), Height, Width);
 	dim3 blockSize(16 , 16);
 	dim3 gridSize (Width / blockSize.x + 1, Height / blockSize.y + 1);
 
-	RayKernel<<<gridSize, blockSize>>>(devPtr, Scene.camera, Scene.d_scene, Scene.Planes.size(), Height, Width);
+	RayKernel<<<gridSize, blockSize>>>(devPtr, Scene.camera, Scene.d_scene, Scene.Planes.size(), Skybox(), Height, Width);
 	cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 }
 
@@ -63,11 +64,29 @@ void KeyboardCallback(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+int oldX, oldY;
+
+void MouseCallback(int button, int state, int x, int y)
+{
+	if(state == GLUT_DOWN)
+	{
+		oldX = x;
+		oldY = y;
+	}
+}
+void MotionCallback(int x, int y)
+{
+		Scene.camera.Rotation(oldX-x, oldY-y);
+		oldX = x;
+		oldY = y;
+		glutPostRedisplay();
+}
+
 int main (int argc, char** argv)
 {
-	printf("%f\n", -!0.0);
+
 	//Create a Window (has to be before all cuda call)
-	GPUAnimBitmap Drawer = GPUAnimBitmap(argc, argv, &DrawCallback, &KeyboardCallback);
+	GPUAnimBitmap Drawer = GPUAnimBitmap(argc, argv, &DrawCallback, &KeyboardCallback, &MouseCallback, &MotionCallback);
 
 	//Load the scene
 	Scene = Model(std::string(argv[argc-1]));

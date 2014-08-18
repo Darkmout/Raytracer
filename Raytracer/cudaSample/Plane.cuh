@@ -70,8 +70,8 @@ public:
 		//http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-9-ray-triangle-intersection/ray-triangle-intersection-geometric-solution/
 
 		float NormalDotRayDirection = Normal.Dot(IncidentRay.Direction);
-		//if the ray and the plane are parallel, their dot product is null
-		if(NormalDotRayDirection == 0)
+		//if the ray and the plane are parallel or in the same direction
+		if(NormalDotRayDirection < 0)
 			return FLOAT_MAX;
 
 		//compute the distance t from the place

@@ -1,0 +1,15 @@
+﻿La génération a démarré 06/08/2014 21:53:15.
+     1>Projet "D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample\cudaSample.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>CudaBuild:
+         Compiling CUDA source file Main.cu...
+         cmd.exe /C "C:\Users\Mickael\AppData\Local\Temp\tmp8c9f73538ceb4958be88ebf919cfe942.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"     --keep-dir Release -maxrregcount=0  --machine 32 --compile -cudart static     -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD  " -o Release\Main.cu.obj "D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample\Main.cu"
+         
+         D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"     --keep-dir Release -maxrregcount=0  --machine 32 --compile -cudart static     -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD  " -o Release\Main.cu.obj "D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample\Main.cu" 
+     1>d:\bibliothÞque\documents\visual studio 2012\projects\cudasample\cudasample\GPUAnimBitmap.h(11): fatal error C1083: Impossible d'ouvrir le fichier includeá: 'GL/freeglut.h'á: No such file or directory
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\BuildCustomizations\CUDA 5.5.targets(592,9): error MSB3721: La commande ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_10,code=\"sm_10,compute_10\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"     --keep-dir Release -maxrregcount=0  --machine 32 --compile -cudart static     -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD  " -o Release\Main.cu.obj "D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample\Main.cu"" s'est arrêtée avec le code 2.
+     1>Génération du projet "D:\bibliothèque\Documents\Visual Studio 2012\Projects\cudaSample\cudaSample\cudaSample.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:00.31

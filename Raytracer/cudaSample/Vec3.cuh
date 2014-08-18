@@ -1,6 +1,7 @@
 #pragma once
 #include "device_launch_parameters.h"
 #include "cuda_runtime.h"
+#include "Matrix3.cuh"
 
 class Vec3
 {
@@ -49,6 +50,15 @@ public:
 
 	__host__ __device__  Vec3 operator*(float o){
 		return Vec3(this->x * o, this->y * o, this->z * o);
+	}
+
+	//TODO: tis is equal to [3x1] * [3x3] 
+	__host__ __device__  Vec3 operator*(Matrix3 o){
+		return Vec3(
+			this->x * o.aa + this->y * o.ab + this->z * o.ac, 
+			this->x * o.ba + this->y * o.bb + this->z * o.bc, 
+			this->x * o.ca + this->y * o.cb + this->z * o.cc
+			);
 	}
 
 	__host__ __device__  Vec3 operator/(float o){

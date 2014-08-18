@@ -28,6 +28,12 @@
     <None Include="Material.cuh">
       <Filter>Model</Filter>
     </None>
+    <None Include="Skybox.cuh">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Matrix3.cuh">
+      <Filter>Model</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="Main.cu" />
