@@ -1,0 +1,72 @@
+# Blender MTL File: 'None'
+# Material Count: 7
+
+newmtl Black_Wool
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.084706 0.072157 0.072157
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Block_of_Emerald
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.260392 0.674510 0.376470
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Block_of_Quartz
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.702745 0.693334 0.674510
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Glowstone
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.781177 0.665098 0.489412
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Gold_Block
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.796862 0.774902 0.244706
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Gray_Wool
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.210196 0.210196 0.210196
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
+
+newmtl Iron_Block
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.746666 0.746666 0.746666
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd cathedrale-RGB.png
