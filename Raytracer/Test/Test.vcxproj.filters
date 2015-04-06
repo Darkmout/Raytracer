@@ -30,5 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="CudaUtils.cuh" />
   </ItemGroup>
 </Project>

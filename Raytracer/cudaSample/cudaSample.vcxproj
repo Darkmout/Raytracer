@@ -21,6 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EA1BE924-626D-424B-AF0C-A9BAB00BCAC5}</ProjectGuid>
     <RootNamespace>cudaSample</RootNamespace>
+    <ProjectName>PathTracer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

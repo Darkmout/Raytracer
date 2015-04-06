@@ -84,7 +84,6 @@ void MotionCallback(int x, int y)
 
 int main (int argc, char** argv)
 {
-
 	//Create a Window (has to be before all cuda call)
 	GPUAnimBitmap Drawer = GPUAnimBitmap(argc, argv, &DrawCallback, &KeyboardCallback, &MouseCallback, &MotionCallback);
 

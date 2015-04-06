@@ -15,6 +15,7 @@ __global__ void RayKernel(uchar4* const outputImageRGBA, Camera camera, Plane* s
 
 
 	Ray ray = camera.GetRay(thread_2D_pos.x, thread_2D_pos.y, numRows, numCols);
+
 	//printf("thread [%d,%d], rayDirectio %f,%f,%f", thread_2D_pos.x, thread_2D_pos.y, ray.Direction.x, ray.Direction.y,ray.Direction.z);
 	//computing the intersection
 	float CurrentDistance = FLOAT_MAX;

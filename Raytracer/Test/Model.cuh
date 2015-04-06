@@ -5,7 +5,7 @@
 #include "Vec3.cuh"
 #include "Plane.cuh"
 #include "Camera.cuh"
-
+#include "CudaUtils.cuh"
 
 
 #include <string>
@@ -154,8 +154,8 @@ __host__ void Loadmtllib(std::string path)
 
 __host__ void UpdateScene()
 {
-	cudaMalloc(&d_scene,   sizeof(Plane) * Planes.size());
-	cudaMemcpy(d_scene, &Planes[0], sizeof(Plane) * Planes.size(), cudaMemcpyHostToDevice);
+	CheckCudaError(cudaMalloc(&d_scene,   sizeof(Plane) * Planes.size()));
+	CheckCudaError(cudaMemcpy(d_scene, &Planes[0], sizeof(Plane) * Planes.size(), cudaMemcpyHostToDevice));
 
 	camera = Camera();
 
